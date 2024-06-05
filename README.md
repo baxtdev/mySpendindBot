@@ -1,0 +1,2 @@
+# mySpendindBot
+my expenses
