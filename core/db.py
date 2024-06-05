@@ -24,6 +24,19 @@ async def get_tasks(user_id:int):
 
     return result
 
+
+async def get_summ(user_id:int):
+    with open (DATABASE_URL,'r+') as file:
+        data_:dict = json.load(file)
+        result = 0
+        for key,value in data_.items():
+            if value["user_id"]==user_id:
+                result+=int(value["amount"])
+
+    return result
+
+
+
 async def delete_task(task_id:int):
     with open ('/Users/macpro2019/projects/to_do-bot/data.json','r') as file:
         data_:dict = json.load(file)

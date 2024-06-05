@@ -13,7 +13,7 @@ from core import keybords as kb
 from core import texts as text
 from core import utils
 from core.states import TaskStates
-from core.db import create_task, get_tasks, delete_task
+from core.db import create_task, get_tasks, delete_task,get_summ
 from core.request.main import get
 
 router = Router()
@@ -32,6 +32,12 @@ async def start_handler(msg: Message):
 @router.message(Command("menu"))
 async def menu_handler(msg: Message):
     await msg.answer(text.menu, reply_markup=kb.menu, parse_mode=ParseMode.HTML)
+
+
+@router.message(Command(commands=["seumm","summary","all"]))
+async def summary_handler(msg: Message):
+    data = await get_summ(msg.from_user.id)
+    await msg.answer(text=f"Сумма ваших трат {data}", reply_markup=kb.menu, parse_mode=ParseMode.HTML)
 
 
 @router.callback_query(F.data == "myexpences")
