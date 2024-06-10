@@ -1,7 +1,10 @@
 from os import getenv
+from dotenv import load_dotenv
 
-BOT_TOKEN = '7087854587:AAFENzTEYRSWsRMJrFfP_sSfGpPo3fTmpxw'
+load_dotenv()
+
+BOT_TOKEN = getenv('BOT_TOKEN')
 
 OPENAI_TOKEN = getenv('OPENAI_KEY')
 
-DATABASE_URL = '/Users/macpro2019/PersonalProjects/mySpendindBot/data.json'
+DATABASE_URL = getenv('DATABASE_PATH')
