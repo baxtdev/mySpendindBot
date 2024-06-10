@@ -13,7 +13,7 @@ from core import keybords as kb
 from core import texts as text
 from core import utils
 from core.states import TaskStates
-from core.db import create_task, get_tasks, delete_task,get_summ
+from core.db import create_task, get_tasks, delete_task,get_summ,day_summary
 from core.request.main import get
 
 router = Router()
@@ -23,7 +23,7 @@ router = Router()
 @router.message(Command(commands=["start","hello"]))
 async def start_handler(msg: Message):  
     await msg.answer(
-        f"Привет! <b>{html.quote(msg.from_user.username)}</b> я бот для запис расходот, могу сохранить твои расходы",
+        f"Привет! <b>{html.quote(msg.from_user.username)}</b> я бот для запис расходов, могу сохранить твои расходы",
         parse_mode=ParseMode.HTML,
         reply_markup=kb.menu,
     )
@@ -34,9 +34,15 @@ async def menu_handler(msg: Message):
     await msg.answer(text.menu, reply_markup=kb.menu, parse_mode=ParseMode.HTML)
 
 
-@router.message(Command(commands=["seumm","summary","all"]))
+@router.message(Command(commands=["summ","summary","all"]))
 async def summary_handler(msg: Message):
     data = await get_summ(msg.from_user.id)
+    await msg.answer(text=f"Сумма ваших трат {data}", reply_markup=kb.menu, parse_mode=ParseMode.HTML)
+
+
+@router.message(Command(commands=["day","today","today_summ"]))
+async def day_summary_handler(msg: Message):
+    data = await day_summary(msg.from_user.id)
     await msg.answer(text=f"Сумма ваших трат {data}", reply_markup=kb.menu, parse_mode=ParseMode.HTML)
 
 
@@ -47,8 +53,8 @@ async def my_task_handler(clbck: types.CallbackQuery):
         task_text = (
             f"📋 <b>Название:</b> {html.quote(task['name'])}\n\n"
             f"📅 <b>Дата:</b> {html.quote(task['date'])}\n\n"
-            f"⏰ <b>Сумма:</b> {html.quote(task['amount'])}\n\n"
-            f"⏰ <b>Категория:</b> {html.quote(task['category'])}\n\n"
+            f"💸 <b>Сумма:</b> {html.quote(task['amount'])}\n\n"
+            f"🧳 <b>Категория:</b> {html.quote(task['category'])}\n\n"
         )
         await clbck.message.answer(text=task_text, parse_mode=ParseMode.HTML,reply_markup=kb.menu)
     
@@ -133,7 +139,7 @@ async def process_amount(message: Message, state: FSMContext) -> None:
     data = await state.get_data()
     
     await message.reply(
-        f"Сумма задачи сохранено",
+        f"Данные сохранены данны можно изменит,для удаление связитесь с админом",
         )
     
     
@@ -148,8 +154,8 @@ async def show_summary(message: Message, data: Dict[str, Any], positive: bool = 
     task_text = (
             f"📋 <b>Название:</b> {html.quote(user_data['name'])}\n\n"
             f"📅 <b>Дата:</b> {html.quote(user_data['date'])}\n\n"
-            f"⏰ <b>Категория:</b> {html.quote(user_data['category'])}\n\n"
-            f"⏰ <b>Сумма:</b> {html.quote(user_data['amount'])}\n\n"
+            f"💸 <b>Категория:</b> {html.quote(user_data['category'])}\n\n"
+            f"🧳 <b>Сумма:</b> {html.quote(user_data['amount'])}\n\n"
         )
 
     await message.answer(text=task_text, reply_markup=kb.ReplyKeyboardMarkup(

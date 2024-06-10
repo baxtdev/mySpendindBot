@@ -1,23 +1,9 @@
 {
     "1491b06d-7eb6-4da9-9a61-468c9433863f": {
-        "name": "\u041e\u0431\u0435\u0434",
+        "name": "example",
         "date": "2024-06-29T00:00:00",
-        "category": "\u041a\u0443\u0448\u0430\u0442\u044c",
-        "amount": "345",
-        "user_id": 313102055
-    },
-    "9d7e0362-e75e-42ea-a8a1-dfe3be6fd290": {
-        "name": "lunch",
-        "date": "2024-06-27T00:00:00",
-        "category": "\u041a\u0443\u0448\u0430\u0442\u044c",
-        "amount": "300",
-        "user_id": 313102055
-    },
-    "a335761c-432a-41b9-b95a-a56f19f63221": {
-        "name": "\u0414\u043e\u0440\u043e\u0433\u0430",
-        "date": "2024-06-05T00:00:00",
-        "category": "\u0414\u043e\u0440\u043e\u0433\u0430",
-        "amount": "15",
+        "category": "example",
+        "amount": "0",
         "user_id": 313102055
     }
 }

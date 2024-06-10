@@ -1,6 +1,9 @@
-from core.config import DATABASE_URL
+from datetime import datetime
 import json
+import aiofiles
 from uuid import uuid4
+
+from core.config import DATABASE_URL
 
 async def create_task(data:dict):
 
@@ -35,6 +38,18 @@ async def get_summ(user_id:int):
 
     return result
 
+
+async def day_summary(user_id):
+    async with aiofiles.open(DATABASE_URL, 'r') as file:
+        data_ = json.loads(await file.read())
+        result = 0
+        today = datetime.today().date()
+        
+        for key, value in data_.items():
+            if value["user_id"] == user_id and datetime.fromisoformat(value["date"]).date() == today:
+                result += int(value["amount"])
+
+    return result
 
 
 async def delete_task(task_id:int):
