@@ -133,7 +133,7 @@ async def process_amount(message: Message, state: FSMContext) -> None:
     data = await state.get_data()
     
     await message.reply(
-        f"Сумма задачи сохранено: {data}\nВведите описание",
+        f"Сумма задачи сохранено",
         )
     
     

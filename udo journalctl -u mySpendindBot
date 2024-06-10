@@ -1,0 +1,6 @@
+[0;1;31m×[0m mySpendindBot.service - Gunicorn instance to serve mySpendindBot
+     Loaded: loaded (/etc/systemd/system/mySpendindBot.service; enabled; vendor preset: enabled)
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Wed 2024-06-05 16:24:49 MSK; 2s ago
+    Process: 211614 ExecStart=/home/bots/mySpendindBot/venv/bin/gunicorn -c /home/bots/mySpendindBot/gunicorn_config.py main:app [0;1;31m(code=exited, status=1/FAILURE)[0m
+   Main PID: 211614 (code=exited, status=1/FAILURE)
+        CPU: 9.140s
